@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rheinquell · Sanitär-Notdienst Region Basel</title>
+
+<!-- Perf: Verbindung zu unpkg (React/Lucide) früh aufbauen (DNS + TLS). -->
+<link rel="preconnect" href="https://unpkg.com" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://unpkg.com" />
+
+<!-- React + Lucide als Production-Builds. defer ⇒ blockiert das Parsen nicht
+     und lädt parallel; die Ausführungsreihenfolge bleibt erhalten.
+     (Vorher: React Development-Build ≈1,1 MB + Browser-Babel zur Laufzeit.) -->
+<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+
+<style>
+  /* overflow-x:clip auf <html> verhindert horizontales Überlaufen, OHNE einen
+     eigenen Scroll-Container zu erzeugen (overflow:hidden auf <body> würde
+     <body> zum Scroller machen → window.scrollY bliebe 0). So bleibt das
+     Fenster der Scroller und scroll-gekoppelte Effekte funktionieren. */
+  /* --page-bg steuert alle großen hellen Sektionen (Body, Inhaltssektionen und
+     die Wasser-Wellen, die in sie übergehen). Per Tweak umschaltbar. Kleine
+     weisse Karten/Menüs bleiben bewusst rein-weiss und heben sich davon ab. */
+  :root {
+    --page-bg: #ffffff;
+    /* Schrift-Stimme (Tweak: Schrift) */
+    --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Notdienst-Akzent (Tweak: Stimmung) – rgb-Tripel für Alpha-Utilities */
+    --copper: 194 56 74; --copper-dark: 156 38 56; --copper-light: 214 90 106;
+    --brand: 31 77 115; --brand-light: 47 102 148; --brand-glow: 138 166 189;
+  }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--page-bg);
+    color: #1f3142;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bg-page { background-color: var(--page-bg); }
+  /* etwas weniger „Startup": Display-Schrift nicht aggressiv eng/fett */
+  h1, h2, h3 { letter-spacing: -0.005em; }
+
+  ::selection { background: rgba(178,58,43,0.18); }
+
+  /* Scrollbar – neutral, kein Neonblau */
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: #eceeef; }
+  ::-webkit-scrollbar-thumb { background: #c4cacf; border: 3px solid #eceeef; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #9aa3ab; }
+
+  /* ---- Scroll-Reveal: spürbar, aber edel. Eigene Kurve, Richtung wird geehrt ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+  }
+  /* will-change NUR solange das Element noch nicht eingeblendet ist (vor + während
+     der Animation). Nach `.in` wird der Compositor-Layer wieder freigegeben –
+     spart auf langen Seiten viele dauerhafte Layer. Visuell identisch. */
+  .reveal:not(.in) { will-change: opacity, transform; }
+  .reveal.in { opacity: 1; transform: none; }
+  /* Richtungs-Varianten – jetzt wieder mit Charakter */
+  .reveal-up    { transform: translateY(26px); }
+  .reveal-left  { transform: translateX(-38px); }
+  .reveal-right { transform: translateX(38px); }
+  .reveal-scale { transform: translateY(20px) scale(.965); }
+  .reveal-card  { transform: translateY(30px) scale(.98); }
+  .reveal-up.in, .reveal-left.in, .reveal-right.in, .reveal-scale.in, .reveal-card.in { transform: none; }
+  /* kompakte Variante (Mobile-Sixpack): kürzerer Weg, schnellere Kurve – dezenter */
+  .reveal.reveal-compact { transform: translateY(14px); transition-duration: .42s; }
+  .reveal.reveal-compact.in { transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .gradient-pan, .svc-enter-up, .svc-enter-down, .anim-bounce-soft, .amb-blob { animation: none !important; }
+    .hl-line, .hv-step { opacity: 1 !important; transform: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* Fokus-Ring */
+  .focus-ring:focus-visible { outline: 2px solid rgba(31,77,115,.6); outline-offset: 2px; }
+
+  /* Native Button-Chrome abschalten: ohne dies überschreibt die UA-Darstellung
+     mancher Engines die per Tailwind gesetzte Hintergrundfarbe (Karten/Chips/
+     Stepper erschienen sonst weiss). Alle Buttons sind ohnehin selbst gestylt. */
+  button, [type='button'], [type='submit'], [type='reset'] {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .lucide { stroke-width: 2; }
+
+  /* dünne, statische Karten-Step-Überblendung im Offerten-Rechner (kein Slide) */
+  .calc-step { animation: none; }
+
+  /* statische Unterstreichung für Text-Links (kein animiertes Wachsen) */
+  .link-underline { text-decoration: none; }
+  .link-underline:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---- Bewusst wieder aktiviert: scroll-relevante, dezente Bewegung ---- */
+  /* Hintergrund-Verlauf der Navy-Sektionen driftet langsam, jetzt spürbarer
+     (grösserer Hub, organische 3-Stop-Kurve – nie hektisch) */
+  .gradient-pan { background-size: 200% 200%; animation: fx-gradient-pan 26s ease-in-out infinite; }
+  @keyframes fx-gradient-pan {
+    0%   { background-position: 10% 50%; }
+    50%  { background-position: 90% 60%; }
+    100% { background-position: 10% 50%; }
+  }
+
+  /* ---- Hero: langsam treibende Ambient-Glows (rein transform/opacity → GPU) ----
+     Sanfte Licht-/Glow-Blobs hinter dem Inhalt geben Tiefe und Leben, ohne
+     je vom Inhalt abzulenken. Die Blur-Ebene wird einmal gerastert und nur
+     noch verschoben/skaliert → günstig, auch auf dem Handy flüssig. */
+  .amb-blob {
+    position: absolute; border-radius: 50%; aspect-ratio: 1;
+    filter: blur(64px); opacity: .55; pointer-events: none;
+    will-change: transform;
+  }
+  .amb-blob-1 { width: 46vw; max-width: 560px; left: -8%; top: 0%;
+    background: radial-gradient(circle at 35% 35%, rgb(var(--brand-glow) / .55), transparent 68%);
+    animation: amb-a 30s ease-in-out infinite; }
+  .amb-blob-2 { width: 40vw; max-width: 480px; right: -10%; top: 22%;
+    background: radial-gradient(circle at 50% 50%, rgb(var(--brand-light) / .50), transparent 70%);
+    animation: amb-b 38s ease-in-out infinite; }
+  .amb-blob-3 { width: 34vw; max-width: 420px; left: 28%; bottom: -18%;
+    background: radial-gradient(circle at 50% 50%, rgb(var(--copper) / .26), transparent 72%);
+    animation: amb-c 34s ease-in-out infinite; }
+  @keyframes amb-a { 0%,100% { transform: translate3d(0,0,0) scale(1); }    50% { transform: translate3d(40px,-26px,0) scale(1.10); } }
+  @keyframes amb-b { 0%,100% { transform: translate3d(0,0,0) scale(1); }    50% { transform: translate3d(-34px,30px,0) scale(1.08); } }
+  @keyframes amb-c { 0%,100% { transform: translate3d(0,0,0) scale(1.02); } 50% { transform: translate3d(28px,-20px,0) scale(1.12); } }
+
+  /* ---- Hero-Headline: edler, zeilenweiser Auftritt beim Laden ----
+     Basiszustand sichtbar; nur bei erlaubter Bewegung steigt jede Zeile
+     gestaffelt von unten ein (Print/Reduced-Motion = sofort sichtbar). */
+  .hl-line { display: block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hl-line { opacity: 0; transform: translateY(.42em); animation: hl-rise .9s cubic-bezier(.22,1,.36,1) both; }
+  }
+  @keyframes hl-rise { to { opacity: 1; transform: none; } }
+
+  /* ---- HeroVisual: Timeline-Schritte gestaffelt einfaden ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .hv-step { opacity: 0; transform: translateY(12px); animation: hv-rise .6s cubic-bezier(.22,1,.36,1) both; }
+  }
+  @keyframes hv-rise { to { opacity: 1; transform: none; } }
+  /* Showcase-Wechsel in der gepinnten Leistungs-Sequenz: gleitet + faded */
+  .svc-enter-up   { animation: fx-svc-up   .55s cubic-bezier(.22,1,.36,1) both; }
+  .svc-enter-down { animation: fx-svc-down .55s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes fx-svc-up   { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
+  @keyframes fx-svc-down { from { opacity: 0; transform: translateY(-34px); } to { opacity: 1; transform: none; } }
+  /* ---- Sektionsübergang: mehrschichtige, ruhig driftende Wasser-Welle ---- */
+  .wd-svg { position:absolute; left:0; bottom:-1px; width:200%; height:100%; display:block; }
+  .wd-lyr { will-change: transform; }
+  .wd-l1 { animation: fx-wave-drift 28s linear infinite; }
+  .wd-l2 { animation: fx-wave-drift 21s linear infinite reverse; }
+  .wd-l3 { animation: fx-wave-drift 15s linear infinite; }
+  @keyframes fx-wave-drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .wd-lyr { animation: none !important; }
+  }
+
+  /* Scroll-Hinweis-Pfeil */
+  .anim-bounce-soft { animation: fx-bounce 1.6s ease-in-out infinite; }
+  @keyframes fx-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+  /* =========================================================================
+     MOBILE-OPTIMIERUNG — nur Verhalten/Layout fürs Handy. Das visuelle Design,
+     die Farben und das Branding bleiben unverändert; Desktop ist nicht betroffen.
+  ========================================================================= */
+
+  /* Touch: kein 300 ms-Tap-Delay und kein grauer Tap-Blitz. Buttons/Links/Felder
+     bleiben voll bedienbar, reagieren aber direkter. */
+  a, button, [role="button"], input, select, textarea, label { -webkit-tap-highlight-color: transparent; }
+  @media (hover: none) { html { touch-action: manipulation; } }
+
+  /* Auf Touch-Geräten klebt :hover nach dem Antippen. touch-action oben sorgt
+     bereits für direkte Reaktion; die Hover-Lifts sind reine Deko und lösen
+     sich beim nächsten Scroll/Tap. */
+
+  /* Reveal: auf schmalen Screens rein vertikal animieren. Die seitliche
+     Verschiebung (±38px) erzeugte sonst – trotz overflow-x:clip – einen
+     unsichtbaren horizontalen Überhang. */
+  @media (max-width: 767px) {
+    .reveal-left, .reveal-right { transform: translateY(24px); }
+    .reveal-left.in, .reveal-right.in { transform: none; }
+  }
+
+  /* Performance: dekorative Endlos-Animationen auf dem Handy anhalten
+     (Akkuschonung + flüssigeres Scrollen). Farben und Verläufe bleiben
+     vollständig sichtbar – nur die Dauerbewegung entfällt. */
+  @media (max-width: 767px) {
+    .gradient-pan { animation: none; }
+    .wd-lyr { animation: none !important; }
+    .anim-bounce-soft { animation: none; }
+  }
+
+  /* ---- Hero-Feinschliff fürs Handy ----------------------------------------
+     Nur Mobile (≤767px). Desktop/Tablet bleiben unverändert. Ziel: ruhigere
+     Proportionen, eine gerahmte Vertrauens-Leiste statt frei umbrechender
+     Icon-Reihe, ein warmer Schimmer am Notruf-Button und eine Glas-Karten-
+     Fußzeile, die umbricht statt zu quetschen. */
+  @media (max-width: 767px) {
+    /* Headline rückt etwas nach oben, Abstände wirken bewusster gesetzt */
+    .home-hero { padding-top: 4.25rem; padding-bottom: 4.5rem; }
+    .home-hero h1 { letter-spacing: -0.018em; }
+
+    /* Vertrauens-Leiste → gerahmte Glas-Karte mit klar getrennten Zeilen */
+    .hero-trust {
+      margin-top: 2.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 0.2rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 18px 38px -26px rgba(0,0,0,0.6);
+    }
+    .hero-trust > div {
+      width: 100%;
+      padding: 0.82rem 0.1rem;
+      gap: 0.7rem;
+      font-size: 13.5px;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.86);
+    }
+    .hero-trust > div + div { border-top: 1px solid rgba(255,255,255,0.10); }
+    .hero-trust > div > .lucide,
+    .hero-trust > div svg { width: 20px; height: 20px; flex: 0 0 auto; }
+
+    /* Notruf-Button: warmer Kupfer-Schimmer für Dringlichkeit + Wertigkeit */
+    #hero-call-cta {
+      box-shadow: 0 16px 34px -12px rgb(var(--copper) / 0.6), 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    /* Glas-Karte: Fußzeile darf umbrechen statt sich zu quetschen */
+    .hv-foot { flex-wrap: wrap; row-gap: 0.85rem; }
+    .hv-foot > div:first-child { flex: 1 1 100%; }
+  }
+</style>
+
+<!-- Tailwind-Utilities als statisches CSS — NACH dem <style> oben, damit die
+     Kaskade exakt der CDN-Variante entspricht (Utilities gewinnen Gleichstände). -->
+<link rel="stylesheet" href="site/dist/tailwind.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Vorkompilierte Module (kein Browser-Babel mehr). Quelle: site/*.jsx →
+       Build: site/dist/*.js. defer ⇒ paralleler Download, Reihenfolge bleibt. -->
+  <script defer src="site/image-slot.js"></script>
+  <script defer src="site/dist/tweaks-panel.js"></script>
+  <script defer src="site/dist/icons.js"></script>
+  <script defer src="site/dist/ui.js"></script>
+  <script defer src="site/dist/scroll-fx.js"></script>
+  <script defer src="site/dist/calc-config.js"></script>
+  <script defer src="site/dist/calc-controls.js"></script>
+  <script defer src="site/dist/calc-steps.js"></script>
+  <script defer src="site/dist/calc-offer.js"></script>
+  <script defer src="site/dist/site-config.js"></script>
+  <script defer src="site/dist/page-home.js"></script>
+  <script defer src="site/dist/page-leistungen.js"></script>
+  <script defer src="site/dist/page-ueber.js"></script>
+  <script defer src="site/dist/page-preise.js"></script>
+  <script defer src="site/dist/page-offerte.js"></script>
+  <script defer src="site/dist/page-referenzen.js"></script>
+  <script defer src="site/dist/page-contact.js"></script>
+  <script defer src="site/dist/page-legal.js"></script>
+  <script defer src="site/dist/app.js"></script>
+</body>
+</html>
