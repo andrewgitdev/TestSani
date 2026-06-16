@@ -154,7 +154,7 @@ function WaveDivider({ color = '#ffffff', flip = false, className = '' }) {
 /* StarRating — schlicht, ohne Glow */
 function StarRating({ value = 5, size = 18, className = '' }) {
   return (
-    <div className={`flex items-center gap-0.5 ${className}`} aria-label={`${value} von 5 Sternen`}>
+    <div className={`flex items-center gap-0.5 ${className}`} role="img" aria-label={`${value} von 5 Sternen`}>
       {[0, 1, 2, 3, 4].map((i) => (
         <span key={i} className={i < value ? 'text-copper' : 'text-navy/20'}>
           <StarFill size={size} />

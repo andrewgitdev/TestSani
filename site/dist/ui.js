@@ -227,6 +227,7 @@ function StarRating({
 }) {
   return /*#__PURE__*/React.createElement("div", {
     className: `flex items-center gap-0.5 ${className}`,
+    role: "img",
     "aria-label": `${value} von 5 Sternen`
   }, [0, 1, 2, 3, 4].map(i => /*#__PURE__*/React.createElement("span", {
     key: i,

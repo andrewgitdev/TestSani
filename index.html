@@ -304,13 +304,22 @@
   .link-underline:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* ---- Bewusst wieder aktiviert: scroll-relevante, dezente Bewegung ---- */
-  /* Hintergrund-Verlauf der Navy-Sektionen driftet langsam, jetzt spürbarer
-     (grösserer Hub, organische 3-Stop-Kurve – nie hektisch) */
-  .gradient-pan { background-size: 200% 200%; animation: fx-gradient-pan 26s ease-in-out infinite; }
+  /* Hintergrund-Verlauf der Navy-Sektionen driftet langsam.
+     PERF: animiert wird NUR `transform` (Compositor/GPU) statt
+     `background-position` (löste Layout/Paint je Frame aus → PageSpeed-Warnung
+     „Nicht zusammengesetzte Animationen"). Die Verlaufsebene (.gradient-pan)
+     ist `inset-0` in einem `overflow-hidden`-Eltern­element; wir vergrössern
+     sie per scale() und verschieben sie minimal – der Überstand wird geclippt,
+     es entstehen keine Kanten. Optisch praktisch identisch zum bisherigen Pan. */
+  .gradient-pan {
+    transform-origin: center;
+    animation: fx-gradient-pan 26s ease-in-out infinite;
+    will-change: transform;
+  }
   @keyframes fx-gradient-pan {
-    0%   { background-position: 10% 50%; }
-    50%  { background-position: 90% 60%; }
-    100% { background-position: 10% 50%; }
+    0%   { transform: scale(1.18) translate3d(-4%, -2%, 0); }
+    50%  { transform: scale(1.18) translate3d(4%,  3%, 0); }
+    100% { transform: scale(1.18) translate3d(-4%, -2%, 0); }
   }
 
   /* ---- Hero: langsam treibende Ambient-Glows (rein transform/opacity → GPU) ----
