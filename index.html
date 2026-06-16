@@ -3,7 +3,208 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rheinquell · Sanitär-Notdienst Region Basel</title>
+<title>Rheinquell · Sanitär-Notdienst Region Basel – 24/7 Rohrbruch & Verstopfung</title>
+
+<!-- ==========================================================================
+     SEO — Primär-Metadaten
+     NAP (Name/Adresse/Telefon) identisch zu site-config.jsx / app.jsx SITE.
+     Bei Umzug oder Rufnummernwechsel hier UND dort pflegen.
+     URLs sind Platzhalter (www.rheinquell.ch) — vor Go-Live anpassen.
+========================================================================== -->
+<meta name="description" content="Rheinquell – Ihr Sanitär-Notdienst für Basel, Riehen, Allschwil & die ganze Region. 24/7 erreichbar, in der Regel in 30 Minuten vor Ort: Rohrbruch, Wasserschaden, Verstopfung, Heizung & Boiler, Badsanierung. Faire Festpreise, 4.9★ aus über 320 Bewertungen. ☎ 061 123 45 67" />
+<meta name="keywords" content="Sanitär Basel, Sanitär-Notdienst Basel, Notfall Sanitär 24h, Rohrbruch Basel, Wasserschaden Basel, Verstopfung Abfluss Basel, Abflussreinigung Basel, Heizung Boiler Basel, Badsanierung Basel, Klempner Basel, Sanitärinstallateur Region Basel, Notdienst 24/7 Basel" />
+<meta name="author" content="Rheinquell GmbH" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="language" content="de-CH" />
+<link rel="canonical" href="https://www.rheinquell.ch/" />
+<link rel="alternate" hreflang="de-CH" href="https://www.rheinquell.ch/" />
+<link rel="alternate" hreflang="x-default" href="https://www.rheinquell.ch/" />
+
+<!-- Lokale SEO: Geo-Signale (4057 Basel) -->
+<meta name="geo.region" content="CH-BS" />
+<meta name="geo.placename" content="Basel" />
+<meta name="geo.position" content="47.5709;7.5994" />
+<meta name="ICBM" content="47.5709, 7.5994" />
+
+<!-- Branding / Browser-Chrome / Favicon (inline SVG = kein Extra-Request) -->
+<meta name="theme-color" content="#1f4d73" />
+<meta name="apple-mobile-web-app-title" content="Rheinquell" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%231f4d73'/%3E%3Cpath%20d='M16%206c-3.2%204.2-6%207.4-6%2010.8a6%206%200%200%200%2012%200C22%2013.4%2019.2%2010.2%2016%206z'%20fill='%23fff'/%3E%3C/svg%3E" />
+
+<!-- Open Graph (Facebook, LinkedIn, WhatsApp …) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Rheinquell" />
+<meta property="og:locale" content="de_CH" />
+<meta property="og:title" content="Rheinquell · Sanitär-Notdienst Region Basel – 24/7" />
+<meta property="og:description" content="24/7 Sanitär-Notdienst für Basel & Region. In der Regel in 30 Minuten vor Ort bei Rohrbruch, Wasserschaden & Verstopfung. Faire Festpreise, 4.9★. ☎ 061 123 45 67" />
+<meta property="og:url" content="https://www.rheinquell.ch/" />
+<meta property="og:image" content="https://www.rheinquell.ch/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Rheinquell Sanitär-Notdienst Region Basel" />
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rheinquell · Sanitär-Notdienst Region Basel – 24/7" />
+<meta name="twitter:description" content="24/7 Sanitär-Notdienst für Basel & Region. In 30 Min. vor Ort bei Rohrbruch & Verstopfung. ☎ 061 123 45 67" />
+<meta name="twitter:image" content="https://www.rheinquell.ch/og-image.jpg" />
+
+<!-- ==========================================================================
+     Strukturierte Daten (Schema.org / JSON-LD)
+     Ein @graph bündelt Betrieb, Website, Organisation und FAQ. So versteht
+     die Suchmaschine Öffnungszeiten, Bewertungen, Leistungen & Einzugsgebiet –
+     Grundlage für Rich Results und das lokale „Notdienst"-Snippet.
+========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Plumber", "EmergencyService", "LocalBusiness"],
+      "@id": "https://www.rheinquell.ch/#business",
+      "name": "Rheinquell GmbH",
+      "alternateName": "Rheinquell Sanitär-Notdienst",
+      "description": "Sanitär-Notdienst und Installationsbetrieb für die Region Basel: Rohrbruch, Wasserschaden, Verstopfung, Heizung & Boiler, Badsanierung und Wartung – 24/7 erreichbar, in der Regel in 30 Minuten vor Ort.",
+      "url": "https://www.rheinquell.ch/",
+      "logo": "https://www.rheinquell.ch/logo.png",
+      "image": "https://www.rheinquell.ch/og-image.jpg",
+      "telephone": "+41611234567",
+      "email": "notdienst@rheinquell.ch",
+      "foundingDate": "2001",
+      "priceRange": "$$",
+      "currenciesAccepted": "CHF",
+      "paymentAccepted": "Bargeld, TWINT, Rechnung, Kreditkarte",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Industriestrasse 12",
+        "postalCode": "4057",
+        "addressLocality": "Basel",
+        "addressRegion": "BS",
+        "addressCountry": "CH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 47.5709,
+        "longitude": 7.5994
+      },
+      "hasMap": "https://www.google.com/maps?q=Industriestrasse+12,+4057+Basel",
+      "areaServed": [
+        { "@type": "City", "name": "Basel" },
+        { "@type": "City", "name": "Riehen" },
+        { "@type": "City", "name": "Allschwil" },
+        { "@type": "City", "name": "Birsfelden" },
+        { "@type": "City", "name": "Münchenstein" },
+        { "@type": "City", "name": "Muttenz" },
+        { "@type": "AdministrativeArea", "name": "Region Basel" }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "07:30",
+          "closes": "17:30",
+          "description": "Büro / Beratung"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "00:00",
+          "closes": "23:59",
+          "description": "Notdienst 24/7 · 365 Tage"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "320",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "slogan": "Sanitär-Notdienst Region Basel – in 30 Minuten vor Ort.",
+      "knowsLanguage": ["de", "fr", "en"],
+      "sameAs": [
+        "https://www.google.com/maps?q=Rheinquell+Basel",
+        "https://www.local.ch/de/d/basel/4057/sanitaer/rheinquell"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Sanitär-Leistungen",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rohrbruch & Wasserschaden", "description": "Leck orten, stoppen und fachgerecht reparieren." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Verstopfung & Abfluss", "description": "Kamera-Inspektion und Hochdruck-Spülung." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Heizung & Boiler", "description": "Service, Reparatur und Geräte-Ersatz." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Badsanierung & Umbau", "description": "Schlüsselfertig aus einer Hand." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wartung & Service", "description": "Vorsorge mit dem Wartungs-Abo." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Installation & Neubau", "description": "Normgerechte Sanitärinstallation." } }
+        ]
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.rheinquell.ch/#organization",
+      "name": "Rheinquell GmbH",
+      "url": "https://www.rheinquell.ch/",
+      "logo": "https://www.rheinquell.ch/logo.png",
+      "foundingDate": "2001",
+      "numberOfEmployees": { "@type": "QuantitativeValue", "value": 30 },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+41611234567",
+        "contactType": "emergency",
+        "areaServed": "CH",
+        "availableLanguage": ["de", "fr", "en"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.rheinquell.ch/#website",
+      "url": "https://www.rheinquell.ch/",
+      "name": "Rheinquell",
+      "inLanguage": "de-CH",
+      "publisher": { "@id": "https://www.rheinquell.ch/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.rheinquell.ch/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Wie schnell ist der Sanitär-Notdienst vor Ort?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In der Region Basel sind wir in der Regel innerhalb von rund 30 Minuten bei Ihnen. Der Notdienst ist 24 Stunden an 365 Tagen erreichbar – rufen Sie uns unter 061 123 45 67 an."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welche Gebiete deckt Rheinquell ab?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wir sind in Basel-Stadt und der ganzen Region tätig – darunter Riehen, Allschwil, Birsfelden, Münchenstein und Muttenz."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was kostet ein Notfall-Einsatz?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wir arbeiten mit fairen, transparenten Festpreisen. Über den Online-Offerten-Rechner erhalten Sie vorab eine unverbindliche Kosteneinschätzung für Ihren Einsatz."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welche Sanitär-Leistungen bietet Rheinquell an?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rohrbruch & Wasserschaden, Verstopfung & Abflussreinigung, Heizung & Boiler, Badsanierung & Umbau, Wartung & Service sowie Installation & Neubau."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <!-- Perf: Verbindung zu unpkg (React/Lucide) früh aufbauen (DNS + TLS). -->
 <link rel="preconnect" href="https://unpkg.com" crossorigin />
@@ -252,6 +453,54 @@
 </head>
 <body>
   <div id="root"></div>
+
+  <!-- ==========================================================================
+       Crawlbarer Fallback ohne JavaScript.
+       Die Seite wird per React gerendert (#root). Suchmaschinen-Crawler bzw.
+       Vorschau-Bots, die kein JS ausführen, sähen sonst nur ein leeres <div>.
+       Dieser <noscript>-Block liefert ihnen die Kerninhalte als echtes HTML –
+       semantische Überschriften, Leistungen, Einzugsgebiet und Kontakt.
+       Für Nutzer mit JS bleibt er unsichtbar.
+  ========================================================================== -->
+  <noscript>
+    <div style="max-width:760px;margin:0 auto;padding:2.5rem 1.25rem;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#1f3142;line-height:1.6">
+      <h1 style="font-size:1.9rem;color:#1f4d73;margin:0 0 .5rem">Rheinquell – Sanitär-Notdienst Region Basel</h1>
+      <p style="font-size:1.15rem;margin:0 0 1.25rem">
+        24/7 erreichbar, in der Regel in 30 Minuten vor Ort. Notruf:
+        <a href="tel:+41611234567" style="color:#c2384a;font-weight:700">061 123 45 67</a>
+      </p>
+      <p>
+        Rheinquell ist Ihr Sanitär- und Heizungs-Notdienst für Basel, Riehen, Allschwil,
+        Birsfelden, Münchenstein, Muttenz und die ganze Region Basel. Seit 2001, über
+        14'000 erledigte Einsätze, 4.9★ aus mehr als 320 Bewertungen.
+      </p>
+
+      <h2 style="font-size:1.35rem;color:#1f4d73;margin:1.75rem 0 .5rem">Unsere Leistungen</h2>
+      <ul>
+        <li><strong>Rohrbruch &amp; Wasserschaden</strong> – Leck orten, stoppen und fachgerecht reparieren.</li>
+        <li><strong>Verstopfung &amp; Abfluss</strong> – Kamera-Inspektion und Hochdruck-Spülung.</li>
+        <li><strong>Heizung &amp; Boiler</strong> – Service, Reparatur und Geräte-Ersatz.</li>
+        <li><strong>Badsanierung &amp; Umbau</strong> – schlüsselfertig aus einer Hand.</li>
+        <li><strong>Wartung &amp; Service</strong> – Vorsorge mit dem Wartungs-Abo.</li>
+        <li><strong>Installation &amp; Neubau</strong> – normgerechte Sanitärinstallation.</li>
+      </ul>
+
+      <h2 style="font-size:1.35rem;color:#1f4d73;margin:1.75rem 0 .5rem">Kontakt &amp; Anfahrt</h2>
+      <address style="font-style:normal">
+        <strong>Rheinquell GmbH</strong><br />
+        Industriestrasse 12, 4057 Basel<br />
+        Notdienst (24/7 · 365 Tage): <a href="tel:+41611234567" style="color:#1f4d73">061 123 45 67</a><br />
+        Büro: Mo–Fr 07:30–17:30<br />
+        E-Mail: <a href="mailto:notdienst@rheinquell.ch" style="color:#1f4d73">notdienst@rheinquell.ch</a>
+      </address>
+
+      <p style="margin-top:1.75rem;padding:1rem;background:#f3f5f6;border-radius:10px">
+        Diese Website nutzt JavaScript für die volle Darstellung (Offerten-Rechner,
+        Navigation und interaktive Inhalte). Bitte aktivieren Sie JavaScript oder
+        rufen Sie uns direkt unter <a href="tel:+41611234567" style="color:#c2384a;font-weight:700">061 123 45 67</a> an.
+      </p>
+    </div>
+  </noscript>
 
   <!-- Vorkompilierte Module (kein Browser-Babel mehr). Quelle: site/*.jsx →
        Build: site/dist/*.js. defer ⇒ paralleler Download, Reihenfolge bleibt. -->
