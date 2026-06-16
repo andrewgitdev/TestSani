@@ -195,7 +195,7 @@ function ServiceCardInner({ s, i, nav }) {
           <Icon name={s.icon} sizeClass="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.8} />
         </span>
         <h3 className="mt-5 font-sans text-xl font-bold text-navy">{s.t}</h3>
-        <p className="mt-2 text-[15px] leading-relaxed text-navy/60">{s.d}</p>
+        <p className="mt-2 text-[15px] leading-relaxed text-navy/80">{s.d}</p>
         <span className={`mt-5 inline-flex items-center gap-1.5 text-sm font-semibold ${tone.arrow} opacity-0 transition-all duration-300 group-hover:opacity-100`}>
           Mehr erfahren <Icon name="arrow-right" size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
         </span>
@@ -346,7 +346,7 @@ function ServicesPinned({ nav }) {
                   <Icon name={s.icon} sizeClass="h-8 w-8" strokeWidth={1.7} />
                 </span>
                 <h3 className="mt-6 font-sans text-4xl font-bold leading-[1.05] text-navy md:text-[3.25rem]">{s.t}</h3>
-                <p className="mt-4 max-w-md text-lg leading-relaxed text-navy/60">{s.d}</p>
+                <p className="mt-4 max-w-md text-lg leading-relaxed text-navy/80">{s.d}</p>
                 <div className="mt-8">
                   <Button onClick={() => nav('leistungen', `leistung-${active}`)} variant="primary" iconRight="arrow-right">Mehr erfahren</Button>
                 </div>
@@ -386,7 +386,7 @@ function ServicesPinned({ nav }) {
                 ></span>
               ))}
             </div>
-            <span className={`flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.2em] text-navy/45 transition-opacity duration-500 ${active < N - 1 ? 'opacity-100' : 'opacity-0'}`}>
+            <span className={`flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.2em] text-navy/80 transition-opacity duration-500 ${active < N - 1 ? 'opacity-100' : 'opacity-0'}`}>
               Weiter scrollen <Icon name="arrow-down" size={14} className="anim-bounce-soft" />
             </span>
           </div>

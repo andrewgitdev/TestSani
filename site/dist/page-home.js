@@ -341,7 +341,7 @@ function ServiceCardInner({
   })), /*#__PURE__*/React.createElement("h3", {
     className: "mt-5 font-sans text-xl font-bold text-navy"
   }, s.t), /*#__PURE__*/React.createElement("p", {
-    className: "mt-2 text-[15px] leading-relaxed text-navy/60"
+    className: "mt-2 text-[15px] leading-relaxed text-navy/80"
   }, s.d), /*#__PURE__*/React.createElement("span", {
     className: `mt-5 inline-flex items-center gap-1.5 text-sm font-semibold ${tone.arrow} opacity-0 transition-all duration-300 group-hover:opacity-100`
   }, "Mehr erfahren ", /*#__PURE__*/React.createElement(Icon, {
@@ -538,7 +538,7 @@ function ServicesPinned({
   })), /*#__PURE__*/React.createElement("h3", {
     className: "mt-6 font-sans text-4xl font-bold leading-[1.05] text-navy md:text-[3.25rem]"
   }, s.t), /*#__PURE__*/React.createElement("p", {
-    className: "mt-4 max-w-md text-lg leading-relaxed text-navy/60"
+    className: "mt-4 max-w-md text-lg leading-relaxed text-navy/80"
   }, s.d), /*#__PURE__*/React.createElement("div", {
     className: "mt-8"
   }, /*#__PURE__*/React.createElement(Button, {
@@ -577,7 +577,7 @@ function ServicesPinned({
     key: it.t,
     className: `h-1.5 rounded-full transition-all duration-500 ${i <= active ? 'w-7 bg-brand' : 'w-3 bg-navy/15'}`
   }))), /*#__PURE__*/React.createElement("span", {
-    className: `flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.2em] text-navy/45 transition-opacity duration-500 ${active < N - 1 ? 'opacity-100' : 'opacity-0'}`
+    className: `flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.2em] text-navy/80 transition-opacity duration-500 ${active < N - 1 ? 'opacity-100' : 'opacity-0'}`
   }, "Weiter scrollen ", /*#__PURE__*/React.createElement(Icon, {
     name: "arrow-down",
     size: 14,

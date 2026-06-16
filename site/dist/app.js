@@ -436,7 +436,7 @@ function Footer({
 }) {
   return /*#__PURE__*/React.createElement("footer", {
     id: "site-footer",
-    className: "bg-navy-900 pt-16 text-white/70"
+    className: "bg-navy-900 pt-16 text-white/80"
   }, /*#__PURE__*/React.createElement("div", {
     className: "mx-auto max-w-7xl px-6"
   }, /*#__PURE__*/React.createElement("div", {
@@ -446,8 +446,8 @@ function Footer({
     size: "md",
     onClick: () => nav('home')
   }), /*#__PURE__*/React.createElement("p", {
-    className: "mt-5 max-w-xs text-sm leading-relaxed text-white/55"
-  }, "Ihr zuverl\xE4ssiger Sanit\xE4r-Partner f\xFCr die Region Basel \u2013 Notdienst, Installation, Sanierung und Wartung aus einer Hand.")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+    className: "mt-5 max-w-xs text-sm leading-relaxed text-white/75"
+  }, "Ihr zuverl\xE4ssiger Sanit\xE4r-Partner f\xFCr die Region Basel \u2013 Notdienst, Installation, Sanierung und Wartung aus einer Hand.")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "font-sans text-sm font-bold uppercase tracking-wider text-white"
   }, "Navigation"), /*#__PURE__*/React.createElement("ul", {
     className: "mt-5 space-y-0.5 text-sm md:space-y-3"
@@ -456,7 +456,7 @@ function Footer({
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => nav(n.id),
     className: "link-underline flex min-h-[44px] items-center transition-colors hover:text-brand-glow md:inline md:min-h-0"
-  }, n.label))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+  }, n.label))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "font-sans text-sm font-bold uppercase tracking-wider text-white"
   }, "Kontakt"), /*#__PURE__*/React.createElement("ul", {
     className: "mt-5 space-y-1 text-sm md:space-y-3"
@@ -484,7 +484,7 @@ function Footer({
   }), /*#__PURE__*/React.createElement("a", {
     href: `mailto:${site.email}`,
     className: "inline-flex min-h-[44px] items-center hover:text-brand-glow md:min-h-0"
-  }, site.email)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
+  }, site.email)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "font-sans text-sm font-bold uppercase tracking-wider text-white"
   }, "Notdienst"), /*#__PURE__*/React.createElement("div", {
     className: "mt-5 rounded-lg border border-white/10 bg-white/5 p-5"
@@ -499,9 +499,9 @@ function Footer({
     href: `tel:${site.telRaw}`,
     className: "mt-2 block font-sans text-2xl font-bold text-white transition-transform hover:translate-x-0.5"
   }, site.tel), /*#__PURE__*/React.createElement("div", {
-    className: "mt-3 text-xs text-white/55"
+    className: "mt-3 text-xs text-white/75"
   }, "B\xFCro: ", site.hoursOffice)))), /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-col items-center justify-between gap-1 border-t border-white/10 py-5 text-xs text-white/55 md:flex-row md:gap-3 md:py-6"
+    className: "flex flex-col items-center justify-between gap-1 border-t border-white/10 py-5 text-xs text-white/75 md:flex-row md:gap-3 md:py-6"
   }, /*#__PURE__*/React.createElement("span", null, "\xA9 ", new Date().getFullYear(), " ", site.name, " GmbH \xB7 Region Basel. Alle Rechte vorbehalten."), /*#__PURE__*/React.createElement("div", {
     className: "flex gap-3 md:gap-5"
   }, /*#__PURE__*/React.createElement("button", {

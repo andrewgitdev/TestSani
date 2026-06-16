@@ -303,16 +303,16 @@ function BigCallCTA({ nav, site, suppress }) {
 =========================================================================== */
 function Footer({ nav, site }) {
   return (
-    <footer id="site-footer" className="bg-navy-900 pt-16 text-white/70">
+    <footer id="site-footer" className="bg-navy-900 pt-16 text-white/80">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-8 pb-12 md:gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
           <div>
             <Logo light size="md" onClick={() => nav('home')} />
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/55">Ihr zuverlässiger Sanitär-Partner für die Region Basel – Notdienst, Installation, Sanierung und Wartung aus einer Hand.</p>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/75">Ihr zuverlässiger Sanitär-Partner für die Region Basel – Notdienst, Installation, Sanierung und Wartung aus einer Hand.</p>
           </div>
 
           <div>
-            <h4 className="font-sans text-sm font-bold uppercase tracking-wider text-white">Navigation</h4>
+            <div className="font-sans text-sm font-bold uppercase tracking-wider text-white">Navigation</div>
             <ul className="mt-5 space-y-0.5 text-sm md:space-y-3">
               {NAV.map((n) =>
               <li key={n.id}><button onClick={() => nav(n.id)} className="link-underline flex min-h-[44px] items-center transition-colors hover:text-brand-glow md:inline md:min-h-0">{n.label}</button></li>
@@ -321,7 +321,7 @@ function Footer({ nav, site }) {
           </div>
 
           <div>
-            <h4 className="font-sans text-sm font-bold uppercase tracking-wider text-white">Kontakt</h4>
+            <div className="font-sans text-sm font-bold uppercase tracking-wider text-white">Kontakt</div>
             <ul className="mt-5 space-y-1 text-sm md:space-y-3">
               <li className="flex items-start gap-2.5"><Icon name="map-pin" size={17} className="mt-0.5 text-brand-glow" /><span>{site.street}<br />{site.city}</span></li>
               <li className="flex items-center gap-2.5"><Icon name="phone" size={17} className="text-brand-glow" /><a href={`tel:${site.telRaw}`} className="inline-flex min-h-[44px] items-center hover:text-brand-glow md:min-h-0">{site.tel}</a></li>
@@ -330,16 +330,16 @@ function Footer({ nav, site }) {
           </div>
 
           <div>
-            <h4 className="font-sans text-sm font-bold uppercase tracking-wider text-white">Notdienst</h4>
+            <div className="font-sans text-sm font-bold uppercase tracking-wider text-white">Notdienst</div>
             <div className="mt-5 rounded-lg border border-white/10 bg-white/5 p-5">
               <div className="flex items-center gap-2 text-copper-light"><Icon name="clock" size={16} /><span className="text-xs font-medium">{site.hoursEmergency}</span></div>
               <a href={`tel:${site.telRaw}`} className="mt-2 block font-sans text-2xl font-bold text-white transition-transform hover:translate-x-0.5">{site.tel}</a>
-              <div className="mt-3 text-xs text-white/55">Büro: {site.hoursOffice}</div>
+              <div className="mt-3 text-xs text-white/75">Büro: {site.hoursOffice}</div>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-1 border-t border-white/10 py-5 text-xs text-white/55 md:flex-row md:gap-3 md:py-6">
+        <div className="flex flex-col items-center justify-between gap-1 border-t border-white/10 py-5 text-xs text-white/75 md:flex-row md:gap-3 md:py-6">
           <span>© {new Date().getFullYear()} {site.name} GmbH · Region Basel. Alle Rechte vorbehalten.</span>
           <div className="flex gap-3 md:gap-5">
             <button onClick={() => nav('impressum')} className="link-underline inline-flex min-h-[44px] items-center transition-colors hover:text-white/70 md:min-h-0">Impressum</button>
